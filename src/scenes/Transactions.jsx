@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import DataGridCustomToolbar from 'components/DataGridCustomToolbar';
 import Header from 'components/Header';
 import { getTransactions } from 'data/fetchData';
+import DataGridBox from 'components/DataGridBox';
 
 const Transactions = () => {
-  const theme = useTheme();
-
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: 20,
@@ -59,34 +58,7 @@ const Transactions = () => {
   return (
     <Box m='1.5rem 2.5rem'>
       <Header title='TRANSACTIONS' subtitle='List of transactions' />
-      <Box
-        mt='40px'
-        height='80vh'
-        sx={{
-          '& .MuiDataGrid-root': {
-            border: 'none',
-          },
-          '& .MuiDataGrid-cell': {
-            borderBottom: 'none',
-          },
-          '& .MuiDataGrid-columnHeaders': {
-            backgroundColor: theme.palette.background.alt,
-            color: theme.palette.secondary[100],
-            borderBottom: 'none',
-          },
-          '& .MuiDataGrid-virtualScroller': {
-            backgroundColor: theme.palette.primary.light,
-          },
-          '& .MuiDataGrid-footerContainer': {
-            backgroundColor: theme.palette.background.alt,
-            color: theme.palette.secondary[100],
-            borderTop: 'none',
-          },
-          '& .MuiDataGrid-toolbarContainer .MuiButton-text': {
-            color: `${theme.palette.secondary[200]} !important`,
-          },
-        }}
-      >
+      <DataGridBox>
         <DataGrid
           getRowId={(row) => row._id}
           rows={(data && data.transactions) || []}
@@ -105,7 +77,7 @@ const Transactions = () => {
             toolbar: { searchInput, setSearchInput, setSearch },
           }}
         />
-      </Box>
+      </DataGridBox>
     </Box>
   );
 };
