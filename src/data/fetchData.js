@@ -8,3 +8,6 @@ export const getProducts = () => {
     stat: dataProductStat.find((stat) => stat.productId === i._id),
   }));
 };
+
+export const getCustomers = () =>
+  dataUser.filter((user) => user.role === 'user');
