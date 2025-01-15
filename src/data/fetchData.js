@@ -1,4 +1,5 @@
 import {
+  dataAffiliateStat,
   dataOverallStat,
   dataProduct,
   dataProductStat,
@@ -72,3 +73,17 @@ export const getAdmins = () =>
   dataUser
     .filter((user) => user.role === 'admin')
     .map(({ password, ...rest }) => rest);
+
+export const getUserPerformance = (id) => {
+  const user = getUserById(id);
+  const affiliateStat = dataAffiliateStat.find((stat) => stat.userId === id);
+
+  const affilicateTransactions = affiliateStat.affiliateSales;
+  const sales = affilicateTransactions
+    .map((tId) =>
+      dataTransaction.find((transaction) => transaction._id === tId)
+    )
+    .filter((t) => t);
+
+  return { user: { ...user, affiliateStat }, sales };
+};
