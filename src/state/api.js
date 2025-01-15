@@ -31,6 +31,10 @@ export const api = createApi({
       query: () => 'sales/sales',
       providesTags: ['Sales'],
     }),
+    getAdmins: build.query({
+      query: () => 'management/admins',
+      providesTags: ['Sales'],
+    }),
   }),
 });
 
@@ -40,4 +44,5 @@ export const {
   useGetCustomersQuery,
   useGetTransactionsQuery,
   useGetSalesQuery,
+  useGetAdminsQuery,
 } = api;

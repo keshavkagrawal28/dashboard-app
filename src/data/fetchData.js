@@ -67,3 +67,8 @@ export const getTransactions = (
 };
 
 export const getSales = () => dataOverallStat[0];
+
+export const getAdmins = () =>
+  dataUser
+    .filter((user) => user.role === 'admin')
+    .map(({ password, ...rest }) => rest);
