@@ -1,4 +1,5 @@
 import {
+  dataOverallStat,
   dataProduct,
   dataProductStat,
   dataTransaction,
@@ -64,3 +65,5 @@ export const getTransactions = (
 
   return { transactions: pageResults, total: count };
 };
+
+export const getSales = () => dataOverallStat[0];
