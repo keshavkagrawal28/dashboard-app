@@ -32,23 +32,27 @@ const Transactions = () => {
       field: '_id',
       headerName: 'ID',
       flex: 1,
+      filterable: false,
     },
     {
       field: 'userId',
       headerName: 'User ID',
       flex: 1,
+      filterable: false,
     },
     {
       field: 'products',
       headerName: '# of Products',
       flex: 1,
       renderCell: (params) => params.value.length,
+      filterable: false,
     },
     {
       field: 'cost',
       headerName: 'COST',
       flex: 1,
       renderCell: (params) => `$${Number(params.value).toFixed(2)}`,
+      filterable: false,
     },
   ];
 
