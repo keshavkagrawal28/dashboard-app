@@ -87,3 +87,36 @@ export const getUserPerformance = (id) => {
 
   return { user: { ...user, affiliateStat }, sales };
 };
+
+export const getDashboardStats = () => {
+  const currentMonth = 'December';
+  const currentYear = 2024;
+  const currentDay = '2024-12-15';
+
+  const transactions = getTransactions(0, 50, null, '');
+  const overallStat = dataOverallStat.find((stat) => stat.year === currentYear);
+  const {
+    totalCustomers,
+    yearlyTotalSoldUnits,
+    yearlySalesTotal,
+    monthlyData,
+    dailyData,
+    salesByCategory,
+  } = overallStat;
+
+  const thisMonthStats = monthlyData.find(
+    (stat) => stat.month === currentMonth
+  );
+  const todayStats = dailyData.find((stat) => stat.date === currentDay);
+
+  return {
+    totalCustomers,
+    yearlyTotalSoldUnits,
+    yearlySalesTotal,
+    monthlyData,
+    salesByCategory,
+    thisMonthStats,
+    todayStats,
+    transactions,
+  };
+};
