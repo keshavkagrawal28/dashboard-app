@@ -37,7 +37,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
   }, [data]);
 
   return (
-    <ResponsiveContainer width='100%' height={isDashboard ? 250 : '100%'}>
+    <ResponsiveContainer width='100%' height='100%'>
       <LineChart
         data={view === 'sales' ? totalSalesLine : totalUnitsLine}
         margin={{ top: 20, left: 20, right: 20, bottom: 20 }}
@@ -54,7 +54,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
         />
         <YAxis
           tick={{ fill: theme.palette.secondary[200] }}
-          tickCount={5}
+          tickCount={isDashboard ? 5 : 15}
           label={{
             value: view === 'sales' ? 'Total Revenue' : 'Total Units',
             angle: -90,

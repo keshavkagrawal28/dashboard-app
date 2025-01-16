@@ -1,15 +1,16 @@
 import { Box } from '@mui/material';
 import { useTheme } from '@mui/material';
 
-const DataGridBox = ({ children }) => {
+const DataGridBox = ({ children, isDashboard }) => {
   const theme = useTheme();
   return (
     <Box
-      mt='40px'
-      height='80vh'
+      mt={isDashboard ? '0' : '40px'}
+      height={isDashboard ? '100%' : '80vh'}
       sx={{
         '& .MuiDataGrid-root': {
           border: 'none',
+          borderRadius: isDashboard ? '0.5rem' : '0',
         },
         '& .MuiDataGrid-cell': {
           borderBottom: 'none',
@@ -20,7 +21,9 @@ const DataGridBox = ({ children }) => {
           borderBottom: 'none',
         },
         '& .MuiDataGrid-virtualScroller': {
-          backgroundColor: theme.palette.primary.light,
+          backgroundColor: isDashboard
+            ? theme.palette.background.alt
+            : theme.palette.primary.light,
         },
         '& .MuiDataGrid-footerContainer': {
           backgroundColor: theme.palette.background.alt,

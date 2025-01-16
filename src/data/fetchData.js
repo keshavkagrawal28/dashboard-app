@@ -93,7 +93,8 @@ export const getDashboardStats = () => {
   const currentYear = 2024;
   const currentDay = '2024-12-15';
 
-  const transactions = getTransactions(0, 50, null, '');
+  const transactionsData = getTransactions(0, 50, null, '');
+  const transactions = transactionsData.transactions;
   const overallStat = dataOverallStat.find((stat) => stat.year === currentYear);
   const {
     totalCustomers,
