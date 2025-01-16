@@ -5,6 +5,7 @@ import {
   ResponsiveContainer,
   Tooltip,
   Legend,
+  LabelList,
 } from 'recharts';
 import { Box, Typography, useTheme } from '@mui/material';
 import { getSales } from 'data/fetchData';
@@ -14,10 +15,10 @@ const BreakdownChart = ({ isDashboard = false }) => {
   const theme = useTheme();
 
   const colors = [
+    theme.palette.secondary[600],
     theme.palette.secondary[500],
+    theme.palette.secondary[400],
     theme.palette.secondary[300],
-    theme.palette.secondary[300],
-    theme.palette.secondary[500],
   ];
 
   const formattedData = Object.entries(data.salesByCategory).map(
@@ -29,7 +30,7 @@ const BreakdownChart = ({ isDashboard = false }) => {
   );
 
   return (
-    // TODO fix issues
+        // TODO fix issues: label animation and total value
     <Box
       height={isDashboard ? '400px' : '100%'}
       width={undefined}
@@ -43,12 +44,13 @@ const BreakdownChart = ({ isDashboard = false }) => {
             data={formattedData}
             dataKey='value'
             nameKey='name'
-            innerRadius='45%'
+            innerRadius='25%'
             fill='#88848d'
             paddingAngle={5}
             startAngle={90}
             endAngle={450}
-            labelLine={false}
+            label={(entry) => (isDashboard ? null : entry.name)}
+            labelLine={isDashboard ? false : true}
             isAnimationActive={true}
             strokeWidth={1}
             stroke={theme.palette.background.paper}
@@ -56,13 +58,16 @@ const BreakdownChart = ({ isDashboard = false }) => {
             {formattedData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.fill} />
             ))}
+            <LabelList dataKey='value' position='inside' />
           </Pie>
-          <Tooltip
-            contentStyle={{
-              backgroundColor: theme.palette.primary.main,
-              color: theme.palette.common.white,
-            }}
-          />
+          {isDashboard && (
+            <Tooltip
+              contentStyle={{
+                backgroundColor: theme.palette.primary.main,
+                color: theme.palette.common.white,
+              }}
+            />
+          )}
           <Legend
             layout='horizontal'
             align='center'
@@ -79,24 +84,6 @@ const BreakdownChart = ({ isDashboard = false }) => {
           />
         </PieChart>
       </ResponsiveContainer>
-
-      <Box
-        position='absolute'
-        top='50%'
-        left='50%'
-        color={theme.palette.secondary[400]}
-        textAlign='center'
-        pointerEvents='none'
-        sx={{
-          transform: isDashboard
-            ? 'translate(-75%, -170%)'
-            : 'translate(-50%, -100%)',
-        }}
-      >
-        <Typography variant='h6'>
-          {!isDashboard && 'Total:'} ${data.yearlySalesTotal}
-        </Typography>
-      </Box>
     </Box>
   );
 };
