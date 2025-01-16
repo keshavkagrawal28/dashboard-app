@@ -119,7 +119,7 @@ const Dashboard = () => {
           p='1rem'
           borderRadius='0.55rem'
         >
-          <OverviewChart view='Sales' isDashboard={true} />
+          <OverviewChart view='sales' isDashboard={true} />
         </Box>
         <StatBox
           title='Monthy Sales'

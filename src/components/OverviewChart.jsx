@@ -63,20 +63,24 @@ const OverviewChart = ({ isDashboard = false, view }) => {
             fill: theme.palette.secondary[200],
           }}
         />
-        <Tooltip
-          contentStyle={{
-            backgroundColor: theme.palette.primary.main,
-            color: theme.palette.secondary[200],
-          }}
-          cursor={false}
-        />
-        <Legend
-          iconSize={12}
-          iconType='circle'
-          wrapperStyle={{ color: theme.palette.secondary[200] }}
-          verticalAlign='bottom'
-          align='right'
-        />
+        {!isDashboard && (
+          <Tooltip
+            contentStyle={{
+              backgroundColor: theme.palette.primary.main,
+              color: theme.palette.secondary[200],
+            }}
+            cursor={false}
+          />
+        )}
+        {!isDashboard && (
+          <Legend
+            iconSize={12}
+            iconType='circle'
+            wrapperStyle={{ color: theme.palette.secondary[200] }}
+            verticalAlign='bottom'
+            align='right'
+          />
+        )}
         <Line
           type='monotone'
           dataKey={view === 'sales' ? 'totalSales' : 'totalUnits'}
@@ -91,11 +95,13 @@ const OverviewChart = ({ isDashboard = false, view }) => {
           strokeWidth={2}
           connectNulls
         />
-        {isDashboard && (<Area
-          type='monotone'
-          dataKey={view === 'sales' ? 'totalSales' : 'totalUnits'}
-          fillOpacity={0.2}
-        />)}
+        {isDashboard && (
+          <Area
+            type='monotone'
+            dataKey={view === 'sales' ? 'totalSales' : 'totalUnits'}
+            fillOpacity={0.2}
+          />
+        )}
       </ComposedChart>
     </ResponsiveContainer>
   );
