@@ -2,13 +2,14 @@ import { useMemo } from 'react';
 import { useTheme } from '@mui/material';
 import { getSales } from 'data/fetchData';
 import {
-  LineChart,
   Line,
   XAxis,
   YAxis,
   Tooltip,
   Legend,
   ResponsiveContainer,
+  Area,
+  ComposedChart,
 } from 'recharts';
 
 const OverviewChart = ({ isDashboard = false, view }) => {
@@ -38,7 +39,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
 
   return (
     <ResponsiveContainer width='100%' height='100%'>
-      <LineChart
+      <ComposedChart
         data={view === 'sales' ? totalSalesLine : totalUnitsLine}
         margin={{ top: 20, left: 20, right: 20, bottom: 20 }}
       >
@@ -90,7 +91,12 @@ const OverviewChart = ({ isDashboard = false, view }) => {
           strokeWidth={2}
           connectNulls
         />
-      </LineChart>
+        {isDashboard && (<Area
+          type='monotone'
+          dataKey={view === 'sales' ? 'totalSales' : 'totalUnits'}
+          fillOpacity={0.2}
+        />)}
+      </ComposedChart>
     </ResponsiveContainer>
   );
 };
