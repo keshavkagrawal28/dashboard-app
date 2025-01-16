@@ -7,7 +7,7 @@ import {
   Legend,
   LabelList,
 } from 'recharts';
-import { Box, Typography, useTheme } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { getSales } from 'data/fetchData';
 
 const BreakdownChart = ({ isDashboard = false }) => {
